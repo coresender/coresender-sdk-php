@@ -34,10 +34,10 @@ class Coresender
     ) {
         $envs = getenv();
 
-        $this->username = $username ?: ($envs['CORESENDER_USERNAME'] ?: null);
-        $this->password = $password ?: ($envs['CORESENDER_PASSWORD'] ?: null);
-        $this->sendingAccountId = $sendingAccountId ?: ($envs['CORESENDER_SENDING_API_ID'] ?: null);
-        $this->sendingAccountKey = $sendingAccountKey ?: ($envs['CORESENDER_SENDING_API_KEY'] ?: null);
+        $this->username = $username ?: ($envs['CORESENDER_USERNAME'] ?? null);
+        $this->password = $password ?: ($envs['CORESENDER_PASSWORD'] ?? null);
+        $this->sendingAccountId = $sendingAccountId ?? ($envs['CORESENDER_SENDING_API_ID'] ?: null);
+        $this->sendingAccountKey = $sendingAccountKey ?? ($envs['CORESENDER_SENDING_API_KEY'] ?: null);
     }
 
     public static function createSendingApi(?string $sendingAccountId = null, ?string $sendingAccountKey = null): SendingApi
