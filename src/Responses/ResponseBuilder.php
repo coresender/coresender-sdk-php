@@ -6,7 +6,6 @@ namespace Coresender\Responses;
 
 use Psr\Http\Message\ResponseInterface;
 use Coresender\Exception\JsonDecodeException;
-use Coresender\Exception\MalformedResponseException;
 
 class ResponseBuilder
 {
@@ -16,9 +15,7 @@ class ResponseBuilder
 
         $data = $this->jsonDecode($content);
 
-        $this->validateResponse($data);
-
-        return call_user_func([$responseClass, 'create'], $data['data'], $data['meta']);
+        return call_user_func([$responseClass, 'create'], $data);
     }
 
     private function jsonDecode(string $content): array
@@ -30,16 +27,5 @@ class ResponseBuilder
         }
 
         return $data;
-    }
-
-    private function validateResponse(array $data): void
-    {
-        if (!isset($data['data'])) {
-            throw new MalformedResponseException('data key is missing');
-        }
-
-        if (!isset($data['meta'])) {
-            throw new MalformedResponseException('meta key is missing');
-        }
     }
 }

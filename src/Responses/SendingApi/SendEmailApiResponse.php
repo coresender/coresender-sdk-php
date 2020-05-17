@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Coresender\Responses\SendingApi;
 
-use Coresender\Responses\ResponseInterface;
+use Coresender\Responses\ApiResponseInterface;
 
-class SendEmailResponse implements ResponseInterface
+class SendEmailApiResponse implements ApiResponseInterface
 {
     /** @var SendEmailResponseItem[] */
     private $items;
@@ -20,13 +20,13 @@ class SendEmailResponse implements ResponseInterface
         $this->meta = $meta;
     }
 
-    public static function create(array $data, array $meta)
+    public static function create(array $data)
     {
         $items = array_map(function ($item) {
             return new SendEmailResponseItem($item);
-        }, $data);
+        }, $data['data']);
 
-        return new self($items, $meta);
+        return new self($items, $data['meta']);
     }
 
     /**

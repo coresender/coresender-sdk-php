@@ -5,7 +5,7 @@ namespace Coresender\Tests\Responses;
 use PHPUnit\Framework\TestCase;
 use Coresender\Responses\ResponseBuilder;
 use GuzzleHttp\Psr7\Response;
-use Coresender\Responses\ResponseInterface;
+use Coresender\Responses\ApiResponseInterface;
 
 class ResponseBuilderTest extends TestCase
 {
@@ -24,16 +24,16 @@ class ResponseBuilderTest extends TestCase
     {
         $response = new Response(200, [], json_encode(['data' => [], 'meta' => []]));
 
-        $responseClass = $this->responseBuilder->build($response, TestResponse::class);
+        $responseClass = $this->responseBuilder->build($response, TestApiResponse::class);
 
-        $this->assertInstanceOf(TestResponse::class, $responseClass);
+        $this->assertInstanceOf(TestApiResponse::class, $responseClass);
     }
 
 }
 
-class TestResponse implements ResponseInterface
+class TestApiResponse implements ApiResponseInterface
 {
-    public static function create(array $data, array $meta): ResponseInterface
+    public static function create(array $data): ApiResponseInterface
     {
         return new self();
     }
