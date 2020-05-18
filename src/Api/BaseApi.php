@@ -6,12 +6,9 @@ namespace Coresender\Api;
 
 use Coresender\Http\RequestBuilder;
 use Coresender\Responses\ResponseBuilder;
-use Psr\Http\Message\ResponseInterface;
-use Coresender\Exception\ValidationException;
-use Coresender\Exception\AuthorizationException;
-use Coresender\Exception\ApiException;
 use Coresender\Http\ClientFactory;
 use Coresender\Responses\PublicApi\LoginApiResponse;
+use Coresender\Http\ErrorHandler;
 
 class BaseApi
 {
@@ -23,14 +20,16 @@ class BaseApi
     private static $accessToken;
 
     protected $options;
-    protected $requestBuilder;
-    protected $responseBuilder;
+    private $requestBuilder;
+    private $responseBuilder;
+    private $errorHandler;
 
     public function __construct(array $options)
     {
         $this->options = $options;
         $this->requestBuilder = new RequestBuilder();
         $this->responseBuilder = new ResponseBuilder();
+        $this->errorHandler = new ErrorHandler();
     }
 
     protected function post(string $uri, array $data, string $responseClass, $authType = self::AUTH_TYPE_NONE)
@@ -60,7 +59,7 @@ class BaseApi
         $response = self::$httpClient->sendRequest($request);
 
         if ($response->getStatusCode() >= 400) {
-            $this->handleError($response);
+            $this->errorHandler->handle($response);
         }
 
         return $this->responseBuilder->build($response, $responseClass);
@@ -79,26 +78,4 @@ class BaseApi
 
         self::$accessToken = $loginResponse->getAccessToken();
     }
-
-    private function handleError(ResponseInterface $response): void
-    {
-        $statusCode = $response->getStatusCode();
-
-        $content = json_decode($response->getBody()->getContents(), true);
-
-        switch ($statusCode) {
-            case 422:
-                throw new ValidationException($content['data']['code'], $content['data']['errors'], $content['data']['code'], $statusCode);
-                break;
-
-            case 401:
-                throw new AuthorizationException($content['data']['code'], $statusCode);
-
-            default:
-                throw new ApiException($content['data']['code']);
-
-        }
-
-    }
-
 }
