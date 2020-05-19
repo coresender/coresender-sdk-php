@@ -5,9 +5,7 @@ namespace Coresender\Helpers;
 class EmailBuilder
 {
     private $data = [
-        'from' => [],
         'to' => [],
-        'body' => []
     ];
 
     public function setFrom(string $email, ?string $name = null)

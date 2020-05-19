@@ -8,6 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 use Coresender\Exception\ValidationException;
 use Coresender\Exception\AuthorizationException;
 use Coresender\Exception\ApiException;
+use Coresender\Exception\InvalidJsonException;
 
 class ErrorHandler
 {
@@ -17,30 +18,41 @@ class ErrorHandler
 
         $content = json_decode((string) $response->getBody(), true);
 
-        switch ($statusCode) {
-            case 422:
-                throw new ValidationException($content['data']['code'], $content['data']['errors'], $this->validationErrorsToMessage($content['data']['errors']), $statusCode);
-                break;
+        $errorCode = $content && isset($content['data'], $content['data']['code']) ? $content['data']['code'] : null;
 
-            case 401:
-                throw new AuthorizationException($content['data']['code'], $statusCode);
-
-            default:
-                throw new ApiException($content['data']['code'], $content['data']['errors'], $this->errorsToMessage($content['data']['errors']));
+        if ($errorCode === 'INVALID_CREDENTIALS' || $statusCode === 401) {
+            throw new AuthorizationException($this->errorsToMessage($content['data']['errors']), $statusCode);
         }
+
+        if ($errorCode === 'INVALID_JSON') {
+            throw new InvalidJsonException($errorCode, $content['data']['errors'], $this->errorsToMessage($content['data']['errors']), $statusCode);
+        }
+
+        if ($errorCode === 'VALIDATION_ERROR') {
+            throw new ValidationException($content['data']['code'], $content['data']['errors'], $this->validationErrorsToMessage($content['data']['errors']), $statusCode);
+        }
+
+        if (is_string($errorCode)) {
+            throw new ApiException($errorCode, $content['data']['errors'], $this->errorsToMessage($content['data']['errors']), $statusCode);
+        }
+
+        throw new ApiException('API_ERROR', [], sprintf('Coresender API request failed, http status code: %s', $statusCode), $statusCode);
     }
 
     private function validationErrorsToMessage(array $errors): string
     {
         $messages = [];
-
         foreach ($errors AS $error) {
+            $items = [];
+
             foreach ($error['errors'] AS $fieldError) {
-                $messages[] = $error['field'] . ': '.$fieldError['description'];
+                $items[] = $fieldError['code'] . ': '.$fieldError['description'];
             }
+
+            $messages[] = sprintf('field %s: %s', $error['field'], join(', ', $items));
         }
 
-        return join('; ', $messages);
+        return join('. ', $messages);
     }
 
     private function errorsToMessage(array $errors): string
