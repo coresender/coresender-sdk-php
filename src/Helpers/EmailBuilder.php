@@ -74,7 +74,7 @@ class EmailBuilder
         return $this;
     }
 
-    public function getData(): array
+    public function getEmail(): array
     {
         return $this->data;
     }
