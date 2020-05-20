@@ -21,16 +21,6 @@ class RequestBuilder
         $this->streamFactory = $streamFactory ?: Psr17FactoryDiscovery::findStreamFactory();
     }
 
-    public function get($uri): RequestInterface
-    {
-        return $this->buildRequest('GET', $uri);
-    }
-
-    public function post($uri, array $data = null): RequestInterface
-    {
-        return $this->buildRequest('POST', $uri, $data);
-    }
-
     public function buildRequest(string $method, string $uri, array $data = null): RequestInterface
     {
         $request = $this->requestFactory->createRequest($method, $uri);
