@@ -50,6 +50,4 @@ class LoginApiResponse implements ApiResponseInterface
     {
         return $this->expiresIn;
     }
-
-
 }

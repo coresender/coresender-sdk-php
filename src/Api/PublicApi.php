@@ -14,5 +14,4 @@ class PublicApi extends BaseApi
 
         return $this->post('/v1/login', $data, LoginApiResponse::class);
     }
-
 }

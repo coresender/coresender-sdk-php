@@ -6,5 +6,4 @@ namespace Coresender\Exception;
 
 class ValidationException extends ApiException implements CoresenderException
 {
-
 }

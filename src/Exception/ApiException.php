@@ -12,7 +12,7 @@ class ApiException extends RuntimeException implements CoresenderException
     protected $errorCode;
     protected $errors;
 
-    public function __construct(string $errorCode, array $errors, $message = "", $code = 0, Throwable $previous = null)
+    public function __construct(string $errorCode, array $errors, $message = '', $code = 0, Throwable $previous = null)
     {
         $this->errorCode = $errorCode;
         $this->errors = $errors;

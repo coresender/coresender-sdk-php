@@ -8,5 +8,4 @@ use RuntimeException;
 
 class JsonDecodeException extends RuntimeException implements CoresenderException
 {
-
 }

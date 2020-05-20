@@ -11,7 +11,7 @@ use Http\Discovery\Psr17FactoryDiscovery;
 
 class ClientFactory
 {
-    public static function createClient(string $endpoint)
+    public static function createClient(string $endpoint): PluginClient
     {
         $urlFactory = Psr17FactoryDiscovery::findUrlFactory();
 

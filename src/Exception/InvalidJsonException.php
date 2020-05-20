@@ -6,5 +6,4 @@ namespace Coresender\Exception;
 
 class InvalidJsonException extends ApiException implements CoresenderException
 {
-
 }

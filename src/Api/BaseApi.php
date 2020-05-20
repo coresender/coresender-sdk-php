@@ -46,12 +46,12 @@ class BaseApi
         $request = $this->requestBuilder->buildRequest($method, $uri, $data);
 
         if ($authType === self::AUTH_TYPE_BASIC) {
-            $request = $request->withHeader('Authorization', 'Basic '.base64_encode(sprintf('%s:%s', $this->options['sendingAccountId'], $this->options['sendingAccountKey'])));
+            $request = $request->withHeader('Authorization', 'Basic ' . base64_encode(sprintf('%s:%s', $this->options['sendingAccountId'], $this->options['sendingAccountKey'])));
         }
 
         if ($authType === self::AUTH_TYPE_OAUTH2) {
             $this->login();
-            $request = $request->withHeader('Authorization', 'Bearer '.self::$accessToken);
+            $request = $request->withHeader('Authorization', 'Bearer ' . self::$accessToken);
         }
 
         $request = $request->withHeader('Accept', 'application/json');

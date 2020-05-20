@@ -31,6 +31,6 @@ class SendingApi extends BaseApi
 
     private function send(array $data): SendEmailApiResponse
     {
-        return $this->post('/v1/send_email', $data,SendEmailApiResponse::class, self::AUTH_TYPE_BASIC);
+        return $this->post('/v1/send_email', $data, SendEmailApiResponse::class, self::AUTH_TYPE_BASIC);
     }
 }

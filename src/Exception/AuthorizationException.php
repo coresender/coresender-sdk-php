@@ -8,5 +8,4 @@ use RuntimeException;
 
 class AuthorizationException extends RuntimeException implements CoresenderException
 {
-
 }

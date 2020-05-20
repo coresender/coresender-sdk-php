@@ -27,7 +27,6 @@ class Coresender
         $this->options['sendingAccountId'] = $sendingAccountId ?? ($envs['CORESENDER_SENDING_API_ID'] ?? null);
         $this->options['sendingAccountKey'] = $sendingAccountKey ?? ($envs['CORESENDER_SENDING_API_KEY'] ?? null);
         $this->options['endpoint'] = $this->endpoint;
-
     }
 
     public static function createSendingApi(?string $sendingAccountId = null, ?string $sendingAccountKey = null): SendingApi

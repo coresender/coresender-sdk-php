@@ -42,11 +42,11 @@ class ErrorHandler
     private function validationErrorsToMessage(array $errors): string
     {
         $messages = [];
-        foreach ($errors AS $error) {
+        foreach ($errors as $error) {
             $items = [];
 
-            foreach ($error['errors'] AS $fieldError) {
-                $items[] = $fieldError['code'] . ': '.$fieldError['description'];
+            foreach ($error['errors'] as $fieldError) {
+                $items[] = $fieldError['code'] . ': ' . $fieldError['description'];
             }
 
             $messages[] = sprintf('field %s: %s', $error['field'], join(', ', $items));
@@ -61,5 +61,4 @@ class ErrorHandler
             return $error['description'];
         }, $errors));
     }
-
 }

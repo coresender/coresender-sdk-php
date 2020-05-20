@@ -10,7 +10,5 @@ class GetResponse implements ApiResponseInterface
 {
     public static function create(array $data, array $meta = [])
     {
-
     }
-
 }

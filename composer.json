@@ -19,7 +19,8 @@
     "php-http/message": "^1.0",
     "guzzlehttp/psr7": "^1.0",
     "nyholm/psr7": "^1.2",
-    "symfony/var-dumper": "^5.0"
+    "symfony/var-dumper": "^5.0",
+    "friendsofphp/php-cs-fixer": "^2.16"
   },
   "autoload": {
     "psr-4": {
