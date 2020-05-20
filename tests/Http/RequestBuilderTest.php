@@ -44,13 +44,13 @@ class RequestBuilderTest extends TestCase
         $request
             ->expects($this->once())
             ->method('withHeader')
-            ->willReturn($request);
+            ->willReturn($request)
         ;
 
         $request
             ->expects($this->once())
             ->method('withBody')
-            ->willReturn($request);
+            ->willReturn($request)
         ;
 
         $data = ['body' => 'content'];

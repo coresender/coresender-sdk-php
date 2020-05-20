@@ -28,7 +28,6 @@ class ResponseBuilderTest extends TestCase
 
         $this->assertInstanceOf(TestApiResponse::class, $responseClass);
     }
-
 }
 
 class TestApiResponse implements ApiResponseInterface
@@ -37,6 +36,4 @@ class TestApiResponse implements ApiResponseInterface
     {
         return new self();
     }
-
 }
-
