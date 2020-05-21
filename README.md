@@ -11,17 +11,13 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them
 
 ```
-Give examples
+PHP 7.1
 ```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
 ```
-Give the example
+composer require coresender/coresender-sdk-php kriswallsmith/buzz nyholm/psr7
 ```
 
 End with an example of getting some data out of the system or using it for a little demo
@@ -30,6 +26,8 @@ End with an example of getting some data out of the system or using it for a lit
 ### Usage
 
 ```php
+
+require 'vendor/autoload.php';
 
 use Coresender\Coresender;
 use Coresender\Helpers\EmailBuilder;

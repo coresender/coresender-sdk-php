@@ -1,26 +1,19 @@
 {
-  "name": "coresender/coresender-php",
+  "name": "coresender/coresender-sdk-php",
   "description": "The Coresender PHP SDK.",
   "require": {
-    "php": "^7.2",
-    "psr/http-factory": "^1.0",
-    "psr/http-message": "^1.0",
+    "php": "^7.1",
     "php-http/client-common": "^2.1",
-    "php-http/httplug": "^2.0",
-    "php-http/message-factory": "^1.0",
     "php-http/discovery": "^1.0",
-    "php-http/guzzle6-adapter": "^2.0",
     "psr/log": "^1.1",
     "ext-json": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^8.0",
-    "php-http/mock-client": "^1.0",
-    "php-http/message": "^1.0",
-    "guzzlehttp/psr7": "^1.0",
     "nyholm/psr7": "^1.2",
     "symfony/var-dumper": "^5.0",
-    "friendsofphp/php-cs-fixer": "^2.16"
+    "friendsofphp/php-cs-fixer": "^2.16",
+    "kriswallsmith/buzz": "^1.1"
   },
   "autoload": {
     "psr-4": {
@@ -32,13 +25,8 @@
       "Coresender\\Tests\\": "tests/"
     }
   },
-  "suggest": {
-    "php-http/curl-client": "cURL client for PHP-HTTP",
-    "guzzlehttp/psr7": "PSR-7 message implementation that also provides common utility methods"
-  },
   "license": "MIT",
   "scripts": {
-    "test": "vendor/bin/phpunit",
-    "test-coverage": "vendor/bin/phpunit --coverage-text --coverage-clover=build/coverage.xml"
+    "test": "vendor/bin/phpunit"
   }
 }

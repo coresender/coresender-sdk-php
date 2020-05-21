@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Coresender;
 
 use Coresender\Api\SendingApi;
-use Coresender\Api\SuppressionsApi;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 class Coresender
 {
@@ -13,6 +14,9 @@ class Coresender
 
     /** @var string */
     private $endpoint = 'https://api.coresender.com';
+
+    /** @var LoggerInterface */
+    private static $logger;
 
     public function __construct(
         ?string $username = null,
@@ -39,8 +43,17 @@ class Coresender
         return new SendingApi($this->options);
     }
 
-    public function suppressionsApi(): SuppressionsApi
+    public static function setLogger(LoggerInterface $logger): void
     {
-        return new SuppressionsApi($this->options);
+        self::$logger = $logger;
+    }
+
+    public static function getLogger(): LoggerInterface
+    {
+        if (!self::$logger) {
+            self::$logger = new NullLogger();
+        }
+
+        return self::$logger;
     }
 }

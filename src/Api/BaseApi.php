@@ -9,6 +9,7 @@ use Coresender\Responses\ResponseBuilder;
 use Coresender\Http\ClientFactory;
 use Coresender\Responses\PublicApi\LoginApiResponse;
 use Coresender\Http\ErrorHandler;
+use Coresender\Coresender;
 
 class BaseApi
 {
@@ -32,12 +33,17 @@ class BaseApi
         $this->errorHandler = new ErrorHandler();
     }
 
+    protected function get(string $uri, string $responseClass, $authType = self::AUTH_TYPE_NONE)
+    {
+        return $this->sendRequest('GET', $uri, [], $responseClass, $authType);
+    }
+
     protected function post(string $uri, array $data, string $responseClass, $authType = self::AUTH_TYPE_NONE)
     {
         return $this->sendRequest('POST', $uri, $data, $responseClass, $authType);
     }
 
-    protected function sendRequest(string $method, string $uri, array $data, string $responseClass, $authType = self::AUTH_TYPE_NONE)
+    private function sendRequest(string $method, string $uri, array $data, string $responseClass, $authType = self::AUTH_TYPE_NONE)
     {
         if (!self::$httpClient) {
             self::$httpClient = $options['httpClient'] ?? ClientFactory::createClient($this->options['endpoint']);
@@ -59,6 +65,7 @@ class BaseApi
         $response = self::$httpClient->sendRequest($request);
 
         if ($response->getStatusCode() >= 400) {
+            Coresender::getLogger()->error(sprintf('Got %s response from %s %s request', $response->getStatusCode(), $method, $uri));
             $this->errorHandler->handle($response);
         }
 
@@ -74,7 +81,7 @@ class BaseApi
         $data = ['grant_type' => 'password', 'email' => $this->options['username'], 'password' => $this->options['password']];
 
         /** @var LoginApiResponse $loginResponse */
-        $loginResponse = $this->sendRequest('POST', '/v1/login', $data, LoginApiResponse::class);
+        $loginResponse = $this->post('/v1/login', $data, LoginApiResponse::class);
 
         self::$accessToken = $loginResponse->getAccessToken();
     }

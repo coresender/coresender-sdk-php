@@ -11,7 +11,7 @@ class ResponseBuilder
 {
     public function build(ResponseInterface $response, string $responseClass)
     {
-        $content = $response->getBody()->getContents();
+        $content = (string) $response->getBody();
 
         $data = $this->jsonDecode($content);
 

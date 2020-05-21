@@ -4,8 +4,8 @@ namespace Coresender\Tests\Responses;
 
 use PHPUnit\Framework\TestCase;
 use Coresender\Responses\ResponseBuilder;
-use GuzzleHttp\Psr7\Response;
 use Coresender\Responses\ApiResponseInterface;
+use Nyholm\Psr7\Response;
 
 class ResponseBuilderTest extends TestCase
 {
