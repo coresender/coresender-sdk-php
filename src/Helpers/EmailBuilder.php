@@ -78,4 +78,9 @@ class EmailBuilder
     {
         return $this->data;
     }
+
+    public function reset(): void
+    {
+        $this->data = [];
+    }
 }

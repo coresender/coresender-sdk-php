@@ -127,4 +127,21 @@ class EmailBuilderTest extends TestCase
 
         $this->assertEquals(['list_unsubscribe' => 'https://example.com/unsubscribe/abcd-1234'], $email);
     }
+
+    /** @test */
+    public function it_should_reset_builder_instance(): void
+    {
+        $emailBuilder = new EmailBuilder();
+        $emailBuilder->setFrom('jean.luc@example.com');
+
+        $email = $emailBuilder->getEmail();
+
+        $this->assertNotEmpty($email);
+
+        $emailBuilder->reset();
+
+        $email = $emailBuilder->getEmail();
+
+        $this->assertEmpty($email);
+    }
 }
