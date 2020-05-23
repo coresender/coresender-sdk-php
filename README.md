@@ -43,6 +43,6 @@ $builder
 ;
 
 $sendingApi = Coresender::createSendingApi('<<INSERT SENDING ACCOUNT ID>>', '<<INSERT SENDING ACCOUNT KEY>>');
-$sendingApi->scheduleEmail($builder->getEmail());
+$sendingApi->addToBatch($builder->getEmail());
 $sendingApi->execute();
 ```
