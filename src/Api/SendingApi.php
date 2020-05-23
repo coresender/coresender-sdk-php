@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Coresender\Api;
 
 use Coresender\Responses\SendingApi\SendEmailApiResponse;
+use Coresender\Responses\SendingApi\SendEmailResponseItem;
 
 class SendingApi extends BaseApi
 {
@@ -24,9 +25,11 @@ class SendingApi extends BaseApi
         return $response;
     }
 
-    public function simpleEmail(array $email): SendEmailApiResponse
+    public function simpleEmail(array $email): SendEmailResponseItem
     {
-        return $this->send([$email]);
+        $response = $this->send([$email]);
+
+        return $response->getItems()[0];
     }
 
     private function send(array $data): SendEmailApiResponse
