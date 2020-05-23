@@ -8,25 +8,25 @@ use Coresender\Responses\SendingApi\SendEmailApiResponse;
 
 class SendingApi extends BaseApi
 {
-    private $emails = [];
+    private $batch = [];
 
-    public function scheduleEmail(array $email): void
+    public function addToBatch(array $email): void
     {
-        $this->emails[] = $email;
+        $this->batch[] = $email;
     }
 
     public function execute(): SendEmailApiResponse
     {
-        $response = $this->send($this->emails);
+        $response = $this->send($this->batch);
 
-        $this->emails = [];
+        $this->batch = [];
 
         return $response;
     }
 
     public function simpleEmail(array $email): SendEmailApiResponse
     {
-        return  $this->send([$email]);
+        return $this->send([$email]);
     }
 
     private function send(array $data): SendEmailApiResponse
