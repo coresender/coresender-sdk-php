@@ -20,7 +20,7 @@ class LoginApiResponse implements ApiResponseInterface
     /** @var int */
     private $expiresIn;
 
-    public static function create(array $data): self
+    public static function create(array $data, int $httpStatus): self
     {
         $response = new self();
         $response->tokenType = $data['token_type'];

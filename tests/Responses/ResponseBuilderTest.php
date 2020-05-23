@@ -32,7 +32,7 @@ class ResponseBuilderTest extends TestCase
 
 class TestApiResponse implements ApiResponseInterface
 {
-    public static function create(array $data): ApiResponseInterface
+    public static function create(array $data, int $httpStatus): ApiResponseInterface
     {
         return new self();
     }

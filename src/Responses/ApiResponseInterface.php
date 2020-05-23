@@ -6,5 +6,5 @@ namespace Coresender\Responses;
 
 interface ApiResponseInterface
 {
-    public static function create(array $data);
+    public static function create(array $data, int $httpStatus);
 }

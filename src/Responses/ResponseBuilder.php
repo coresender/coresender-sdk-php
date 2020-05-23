@@ -15,7 +15,7 @@ class ResponseBuilder
 
         $data = $this->jsonDecode($content);
 
-        return call_user_func([$responseClass, 'create'], $data);
+        return call_user_func([$responseClass, 'create'], $data, $response->getStatusCode());
     }
 
     private function jsonDecode(string $content): array
