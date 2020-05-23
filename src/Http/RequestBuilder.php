@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coresender\Http;
 
 use Http\Discovery\Psr17FactoryDiscovery;

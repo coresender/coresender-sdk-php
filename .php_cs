@@ -16,6 +16,7 @@ return PhpCsFixer\Config::create()
             'cast_spaces' => true,
             'compact_nullable_typehint' => true,
             'concat_space' => ['spacing' => 'one'],
+            'declare_strict_types' => true,
             'explicit_indirect_variable' => true,
             'function_typehint_space' => true,
             'heredoc_to_nowdoc' => true,
