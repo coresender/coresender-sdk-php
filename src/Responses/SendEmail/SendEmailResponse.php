@@ -2,17 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Coresender\Responses\SendingApi;
+namespace Coresender\Responses\SendEmail;
 
 use Coresender\Responses\ApiResponseInterface;
+use IteratorAggregate;
+use ArrayIterator;
+use Traversable;
 
-class SendEmailApiResponse implements ApiResponseInterface
+class SendEmailResponse implements ApiResponseInterface, IteratorAggregate
 {
     /** @var SendEmailResponseItem[] */
-    private $items;
+    private $items = [];
 
     /** @var array */
-    private $meta;
+    private $meta = [];
 
     /** @var int */
     private $httpStatus;
@@ -49,5 +52,13 @@ class SendEmailApiResponse implements ApiResponseInterface
     public function getMeta(): array
     {
         return $this->meta;
+    }
+
+    /**
+     * @return ArrayIterator|Traversable|SendEmailResponseItem[]
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->items);
     }
 }
