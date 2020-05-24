@@ -42,7 +42,7 @@ $builder
     ->setBodyHtml('<p>Geordi, I need engines, <strong>now!</strong></p>')
 ;
 
-$sendingApi = Coresender::createSendingApi('<<INSERT SENDING ACCOUNT ID>>', '<<INSERT SENDING ACCOUNT KEY>>');
+$sendingApi = Coresender::createSendEmailApi('<<INSERT SENDING ACCOUNT ID>>', '<<INSERT SENDING ACCOUNT KEY>>');
 $sendingApi->addToBatch($builder->getEmail());
 $sendingApi->execute();
 ```

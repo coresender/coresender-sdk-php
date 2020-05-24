@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Coresender;
 
-use Coresender\Api\SendingApi;
+use Coresender\Api\SendEmail;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
@@ -33,14 +33,14 @@ class Coresender
         $this->options['endpoint'] = $this->endpoint;
     }
 
-    public static function createSendingApi(?string $sendingAccountId = null, ?string $sendingAccountKey = null): SendingApi
+    public static function createSendEmailApi(?string $sendingAccountId = null, ?string $sendingAccountKey = null): SendEmail
     {
-        return (new self(null, null, $sendingAccountId, $sendingAccountKey))->sendingApi();
+        return (new self(null, null, $sendingAccountId, $sendingAccountKey))->sendEmail();
     }
 
-    public function sendingApi(): SendingApi
+    public function sendEmail(): SendEmail
     {
-        return new SendingApi($this->options);
+        return new SendEmail($this->options);
     }
 
     public static function setLogger(LoggerInterface $logger): void

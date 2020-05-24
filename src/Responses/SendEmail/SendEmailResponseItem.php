@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Coresender\Responses\SendingApi;
+namespace Coresender\Responses\SendEmail;
 
 class SendEmailResponseItem
 {

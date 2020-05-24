@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Coresender\Api;
 
-use Coresender\Responses\SendingApi\SendEmailApiResponse;
-use Coresender\Responses\SendingApi\SendEmailResponseItem;
+use Coresender\Responses\SendEmail\SendEmailResponse;
+use Coresender\Responses\SendEmail\SendEmailResponseItem;
 
-class SendingApi extends BaseApi
+class SendEmail extends BaseApi
 {
     private $batch = [];
 
@@ -16,7 +16,7 @@ class SendingApi extends BaseApi
         $this->batch[] = $email;
     }
 
-    public function execute(): SendEmailApiResponse
+    public function execute(): SendEmailResponse
     {
         $response = $this->send($this->batch);
 
@@ -32,8 +32,8 @@ class SendingApi extends BaseApi
         return $response->getItems()[0];
     }
 
-    private function send(array $data): SendEmailApiResponse
+    private function send(array $data): SendEmailResponse
     {
-        return $this->post('/v1/send_email', $data, SendEmailApiResponse::class, self::AUTH_TYPE_BASIC);
+        return $this->post('/v1/send_email', $data, SendEmailResponse::class, self::AUTH_TYPE_BASIC);
     }
 }
