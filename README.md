@@ -1,4 +1,4 @@
-# The Official Coresender PHP SDK
+# Coresender PHP SDK
 
 This is the officially supported PHP library for [Coresender](https://coresender.com). It allows you to quickly and easily integrate with our API and improve your email deliverability.
 
