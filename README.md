@@ -1,29 +1,31 @@
-# Coresender PHP SDK
+# The Official Coresender PHP SDK
 
-One Paragraph of project description goes here
-
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+This is the officially supported PHP library for [Coresender](https://coresender.com). It allows you to quickly and easily integrate with our API and improve your email deliverability.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+* PHP version 7.1+
+* The Coresender service. You can start with a free 100 emails/month developer plan and move to one of our [pricing plans](https://coresender.com/pricing) when you're done.
 
-```
-PHP 7.1
-```
+### Installation
 
-### Installing
+To install the SDK, you will need to be using [Composer](http://getcomposer.org/).
 
-```
+The Coresender PHP SDK is not hard coupled to Guzzle, Buzz or any other library that sends
+HTTP messages. Instead, it uses the [PSR-18](https://www.php-fig.org/psr/psr-18/) client abstraction.
+This will give you the flexibility to choose what
+[PSR-7 implementation and HTTP client](https://packagist.org/providers/php-http/client-implementation)
+you want to use. 
+
+Run the following command to get started: 
+
+```bash
 composer require coresender/coresender-sdk-php kriswallsmith/buzz nyholm/psr7
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
-
-
 ### Usage
+
+Here's how to send an email using the SDK:
 
 ```php
 
@@ -42,7 +44,17 @@ $builder
     ->setBodyHtml('<p>Geordi, I need engines, <strong>now!</strong></p>')
 ;
 
-$sendingApi = Coresender::createSendEmailApi('<<INSERT SENDING ACCOUNT ID>>', '<<INSERT SENDING ACCOUNT KEY>>');
+$sendingApi = Coresender::createSendEmailApi('<<INSERT SENDING ACCOUNT ID>>', '<<INSERT SENDING ACCOUNT API KEY>>');
 $sendingApi->addToBatch($builder->getEmail());
 $sendingApi->execute();
 ```
+
+### Contribute
+
+The Coresender PHP SDK is an open-source project released under MIT license. We welcome any contributions!
+
+You can help by:
+* Writing new code
+* Creating issues if you find problems
+* Helping others with their issues
+* Reviewing PRs
