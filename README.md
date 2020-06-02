@@ -87,6 +87,8 @@ The result of an API call is a domain object.
 $sendingApi = Coresender::createSendEmailApi('<<INSERT SENDING ACCOUNT ID>>', '<<INSERT SENDING ACCOUNT API KEY>>');
 $result = $sendingApi->execute();
 
+echo 'All accepted:' . $result->allAccepted();
+
 foreach ($result as $entry) {
     echo $entry->getMessageId() . ': ' . $entry->getStatus();
 }
