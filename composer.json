@@ -1,5 +1,5 @@
 {
-  "name": "coresender/coresender-sdk-php",
+  "name": "coresender/coresender",
   "description": "The Coresender PHP SDK.",
   "require": {
     "php": "^7.1",
