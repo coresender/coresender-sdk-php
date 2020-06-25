@@ -32,6 +32,17 @@ class EmailBuilderTest extends TestCase
     }
 
     /** @test */
+    public function it_should_add_to_reply_to(): void
+    {
+        $emailBuilder = new EmailBuilder();
+        $emailBuilder->addToReplyTo('deanna@example.com', 'Deanna Troi');
+
+        $email = $emailBuilder->getEmail();
+
+        $this->assertEquals(['reply_to' => [['email' => 'deanna@example.com', 'name' => 'Deanna Troi']]], $email);
+    }
+
+    /** @test */
     public function it_should_set_subject(): void
     {
         $emailBuilder = new EmailBuilder();

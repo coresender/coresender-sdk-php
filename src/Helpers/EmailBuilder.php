@@ -20,6 +20,12 @@ class EmailBuilder
         return $this;
     }
 
+    public function addToReplyTo(string $email, ?string $name = null)
+    {
+        $this->data['reply_to'][] = ['email' => $email, 'name' => $name];
+        return $this;
+    }
+
     public function setSubject(string $subject)
     {
         $this->data['subject'] = $subject;
