@@ -1,0 +1,12 @@
+[versionner]
+file = ./VERSION
+;up_part= patch
+;default_init_version = 1.0.0
+;default_increase_value = 1
+
+[vcs]
+engine = git
+tag = yes
+tag_params =
+commit_message = '%(version)s'
+
