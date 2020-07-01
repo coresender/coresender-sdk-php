@@ -63,6 +63,7 @@ $builder
     ->setSubject('I need engines')
     ->setBodyText('Geordi, I need engines, now!')
     ->setBodyHtml('<p>Geordi, I need engines, <strong>now!</strong></p>')
+    ->addToReplyTo('deanna@example.com', 'Deanna Troi')
 ;
 $sendingApi->addToBatch($builder->getEmail());
 
