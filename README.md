@@ -20,7 +20,7 @@ you want to use.
 Run the following command to get started: 
 
 ```bash
-composer require coresender/coresender-sdk-php kriswallsmith/buzz nyholm/psr7
+composer require coresender/coresender kriswallsmith/buzz nyholm/psr7
 ```
 
 ## Usage
