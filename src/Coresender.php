@@ -22,7 +22,8 @@ class Coresender
         ?string $username = null,
         ?string $password = null,
         ?string $sendingAccountId = null,
-        ?string $sendingAccountKey = null
+        ?string $sendingAccountKey = null,
+        ?string $apiEndpoint = null
     ) {
         $envs = getenv();
 
@@ -31,12 +32,16 @@ class Coresender
         $this->options['password'] = $password ?: ($envs['CORESENDER_PASSWORD'] ?? null);
         $this->options['sendingAccountId'] = $sendingAccountId ?? ($envs['CORESENDER_SENDING_API_ID'] ?? null);
         $this->options['sendingAccountKey'] = $sendingAccountKey ?? ($envs['CORESENDER_SENDING_API_KEY'] ?? null);
-        $this->options['endpoint'] = $this->endpoint = getenv('CORESENDER_API_ENDPOINT') ?: 'https://api.coresender.com';
+        $this->options['endpoint'] = $this->endpoint = $apiEndpoint ?? getenv('CORESENDER_API_ENDPOINT') ?: 'https://api.coresender.com';
     }
 
-    public static function createSendEmailApi(?string $sendingAccountId = null, ?string $sendingAccountKey = null): SendEmail
+    public static function createSendEmailApi(
+        ?string $sendingAccountId = null,
+        ?string $sendingAccountKey = null,
+        ?string $apiEndpoint = null
+    ): SendEmail
     {
-        return (new self(null, null, $sendingAccountId, $sendingAccountKey))->sendEmail();
+        return (new self(null, null, $sendingAccountId, $sendingAccountKey, $apiEndpoint))->sendEmail();
     }
 
     public function sendEmail(): SendEmail
