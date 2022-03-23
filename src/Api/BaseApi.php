@@ -61,8 +61,28 @@ class BaseApi
         }
 
         $request = $request->withHeader('Accept', 'application/json');
+        if ($this->options['debug']) {
+            $debugUri = $request->getUri()->getPath() .
+                ($request->getUri()->getQuery() ? '?' . $request->getUri()->getQuery() : '');
+            Coresender::getLogger()->debug(
+                "Sending {$request->getMethod()} data to {$debugUri}",
+                [
+                    'headers' => $request->getHeaders(),
+                    'body' => $request->getBody()->getContents(),
+                ]
+            );
+        }
 
         $response = self::$httpClient->sendRequest($request);
+        if ($this->options['debug']) {
+            Coresender::getLogger()->debug(
+                "Received response: {$response->getStatusCode()} {$response->getReasonPhrase()}",
+                [
+                    'headers' => $response->getHeaders(),
+                    'body' => $response->getBody()->getContents(),
+                ]
+            );
+        }
 
         if ($response->getStatusCode() >= 400) {
             Coresender::getLogger()->error(sprintf('Got %s response from %s %s request', $response->getStatusCode(), $method, $uri));

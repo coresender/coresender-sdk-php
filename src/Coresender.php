@@ -26,6 +26,7 @@ class Coresender
     ) {
         $envs = getenv();
 
+        $this->options['debug'] = $envs['CORESENDER_DEBUG'] ?? false;
         $this->options['username'] = $username ?: ($envs['CORESENDER_USERNAME'] ?? null);
         $this->options['password'] = $password ?: ($envs['CORESENDER_PASSWORD'] ?? null);
         $this->options['sendingAccountId'] = $sendingAccountId ?? ($envs['CORESENDER_SENDING_API_ID'] ?? null);
