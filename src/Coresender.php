@@ -13,7 +13,7 @@ class Coresender
     private $options = []; // FIXME Use DTO
 
     /** @var string */
-    private $endpoint = 'https://api.coresender.com';
+    private $endpoint;
 
     /** @var LoggerInterface */
     private static $logger;
@@ -31,7 +31,7 @@ class Coresender
         $this->options['password'] = $password ?: ($envs['CORESENDER_PASSWORD'] ?? null);
         $this->options['sendingAccountId'] = $sendingAccountId ?? ($envs['CORESENDER_SENDING_API_ID'] ?? null);
         $this->options['sendingAccountKey'] = $sendingAccountKey ?? ($envs['CORESENDER_SENDING_API_KEY'] ?? null);
-        $this->options['endpoint'] = $this->endpoint;
+        $this->options['endpoint'] = $this->endpoint = getenv('CORESENDER_API_ENDPOINT') ?: 'https://api.coresender.com';
     }
 
     public static function createSendEmailApi(?string $sendingAccountId = null, ?string $sendingAccountKey = null): SendEmail
